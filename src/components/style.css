@@ -243,7 +243,7 @@
 }
 
 .UpperHalf {
-    padding: 2rem;
+    padding: 1rem 0rem;
     display: flex;
     justify-content: flex-start;
 }
@@ -251,7 +251,9 @@
 .PostWrapper {
     display: flex;
     outline: solid;
-    width: 80%;
+    width: 60%;
+    flex-direction: column;
+    padding: 0 2rem;
 }
 
 .ProfileImage {
@@ -278,3 +280,22 @@
     font-weight: 700;
 }
 
+
+.ContentWrapper {
+    padding: 1rem 0rem;
+}
+
+.ContentWrapper {
+    width: 100%;
+}
+
+.ReviewContent {
+    width: 90%;
+    height: 100%;
+    border: solid;
+    padding: 0.5em;
+    margin: 2em 0;
+    resize: vertical;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: 600;
+}

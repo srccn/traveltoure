@@ -27,7 +27,7 @@ function SearchBar() {
             setEnter(false);
         }
         if (key === "Enter" && value !== "") {
-            setSelectedKey(value[0].toUpperCase() + value.substring(1, value.length() - 1));
+            setSelectedKey(value[0].toUpperCase() + value.substring(1, value.length));
             setEnter(true);
             setValue("");
         }

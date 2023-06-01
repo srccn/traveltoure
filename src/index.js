@@ -23,7 +23,7 @@ const router = createBrowserRouter([
   {
     path: "/info",
     element: <Info />,
-    errorElement: <div>Bruh what</div>,
+    errorElement: <div>Wrong Path</div>,
     children: [
       {
         path: ":key",

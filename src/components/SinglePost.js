@@ -1,7 +1,24 @@
 import React from 'react';
+import Rating from './Rating';
+import Content from './Content';
+import { useState } from 'react';
 
 
 function SinglePost() {
+
+    const [content, setContent] = useState("");
+    const [rating, setRating] = useState({ items: [] });
+    const [name, setName] = useState("");
+    const [town, setTown] = useState("");
+
+    function handleNameChange(e) {
+        setName(name + e.key);
+    }
+
+    function handleTownChange(e) {
+        setTown(town + e.key);
+    }
+
     return (
         <div className="OutsideBorder">
             <div className="PostWrapper">
@@ -11,15 +28,15 @@ function SinglePost() {
                     </div>
                     <div className="NameLocationContainer">
                         <div className="UserName">
-                            Anonymous User
+                            <input className="NameContainer" placeholder='Name' onKeyDown={(e)=> handleNameChange(e)}/>
                         </div>
                         <div className="Location">
-                            Boston, MA
+                            <input className="NameContainer" placeholder='Hometown' onKeyDown={(e)=> handleTownChange(e)}/>
                         </div>
                     </div>
                 </div>
-                <div className="Rating">
-                </div>
+                <Rating rating={rating} setRating={setRating}/>
+                <Content content={content} setContent={setContent}/>
             </div>
         </div>
     );
