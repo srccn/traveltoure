@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+
+.Header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    color: #EAE6E5;
+}
+
+.HeaderItem {
+    padding: 2em 4em;
+    cursor: pointer;
+}
+
+.First {
+    padding: 0em 4em;
+    align-self: flex-start;
+}
+
+.Rest {
+    display: flex;
+    flex-direction: row;
+}
+
+.Top-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: #EAE6E5;
+}
+
+.Top {
+    max-width: 50vw;
+    display:flex;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 10vw;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.Hero {
+    width: 32vw;
+    height: 80vh;
+    padding: 3vh 10vw 10vh 0em;
+}
+
+.LeftSide {
+    display: flex;
+    flex-direction: column;
+    padding: 0em 0em 0em 10vw;
+}
+
+.Description {
+    font-size: 2vw;
+    max-width: 35vw;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.SearchBar {
+    display: flex;
+    padding: 2vh 0;
+    flex-direction: row;
+    align-items: center;
+    background-color:white;
+    width: 75%;
+}
+
+.SearchBox {
+    margin-left: 7px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.25rem;
+    width: 100%;
+}
+
+.SearchIcon {
+    color: royalblue;
+    margin-left: 15px;
+}
+
+.SearchWrapper {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.25rem;
+    height: 18vh;
+    margin: 2vh 0 0vh 0;
+}
+
+.Dropdown {
+    width: 75%;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.Dropdown-option {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 4vh;
+    background-color: white;
+    color: black;
+    padding-left: 10px;
+    padding: 0.5rem;
+}
+
+.Dropdown-option:hover {
+    background-color: #EAE6E5;
+}
+
+
+.Hero { 
+    background: url("https://i.pinimg.com/564x/2e/f5/12/2ef5122e22a08f639e052228c044872e.jpg");
+    
+    background-size: 30vw 80%;
+    background-position: center;
+    animation-name: animate;
+    animation-timing-function: ease-in-out;
+    animation-duration: 30s;
+    background-repeat: no-repeat;
+    animation-iteration-count: infinite;
+    
+}
+
+@keyframes animate {
+    0% {
+        background: url("https://i.pinimg.com/564x/2e/f5/12/2ef5122e22a08f639e052228c044872e.jpg");
+        background-size: 30vw 80%;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    20% {
+        background: url("https://i.pinimg.com/474x/84/48/9e/84489edaacdb08aa905419e976dd1817.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 30vw 80%;
+    }
+    40% {
+        background: url("https://i.pinimg.com/564x/e1/99/b2/e199b25cd826924f861cf8762eee449c.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 30vw 80%;
+    }
+    60% {
+        background: url("https://i.pinimg.com/474x/14/be/26/14be26d0575558021a47c17af37519eb.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 30vw 80%;
+    }
+    80% {
+        background: url("https://i.pinimg.com/564x/f7/86/c4/f786c49e79779e3a76cbbee9e68c5c03.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 30vw 80%;
+    }
+
+}
+
+
+.TabWrapper {
+    display: flex;
+    justify-content: center;
+    width: 20%;
+    margin: 2vh 0 0vh 0;
+    height: 10%;
+    font-size: 1rem;
+}
+
+.LeftTabItem {
+    padding: 1rem;
+    background-color: #7796CB;
+    cursor: pointer;
+}
+
+.RightTabItem {
+    padding: 1rem;
+    background-color: lightgrey;
+    cursor: pointer;
+}
+
+.InfoTop {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.SearchInfo {
+    width: 40%;
+}
+
+.PlaceTitle {
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    font-size: 4em;
+}
+
+.FirstLine {
+    padding: 1rem 2rem 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    position: sticky;
+    top: 0rem;
+}
+
+.ContentFirstLine {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.25rem;
+    justify-content: flex-end;
+}
+
+.AddPost {
+    width: 10vw;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #8DC9F8;
+    padding: 0 0.5rem;
+    margin: 0 2rem;
+    cursor: pointer;
+}
+
+.AddText {
+    margin-left: 7px;
+}
+
+.Sort {
+    cursor: pointer;
+    margin: 0 2rem;
+}
+
+.OutsideBorder {
+    display: flex;
+    justify-content: center;
+}
+
+.UpperHalf {
+    padding: 2rem;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.PostWrapper {
+    display: flex;
+    outline: solid;
+    width: 80%;
+}
+
+.ProfileImage {
+    height: 10vh;
+    width: 10vh;
+    border-radius: 50%;
+    margin: rem;
+}
+
+.AllPlace {
+    background: #D1D2F9;
+}
+
+
+.NameLocationContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 0 1rem;
+}
+
+.UserName {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
