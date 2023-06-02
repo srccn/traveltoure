@@ -1,22 +1,18 @@
 import React from 'react';
 import Rating from './Rating';
 import Content from './Content';
-import { useState } from 'react';
 
 
-function SinglePost() {
+function SinglePost(props) {
+    const {content, setContent, rating, setRating, name, setName,
+        town, setTown, add} = props;
 
-    const [content, setContent] = useState("");
-    const [rating, setRating] = useState({ items: [] });
-    const [name, setName] = useState("");
-    const [town, setTown] = useState("");
-
-    function handleNameChange(e) {
-        setName(name + e.key);
+    function handleNameChange(event) {
+        setName(event.target.value);
     }
 
-    function handleTownChange(e) {
-        setTown(town + e.key);
+    function handleTownChange(event) {
+        setTown(event.target.value);
     }
 
     return (
@@ -28,15 +24,17 @@ function SinglePost() {
                     </div>
                     <div className="NameLocationContainer">
                         <div className="UserName">
-                            <input className="NameContainer" placeholder='Name' onKeyDown={(e)=> handleNameChange(e)}/>
+                            {add ? <input className="NameContainer" placeholder='Name' onChange={handleNameChange}/>
+                            : <div className="OutputName">{name}</div>}
                         </div>
                         <div className="Location">
-                            <input className="NameContainer" placeholder='Hometown' onKeyDown={(e)=> handleTownChange(e)}/>
+                            {add && <input placeholder='Hometown' onChange={handleTownChange}/>}
+                            {!add && <div className="OutputTown">{town}</div>}
                         </div>
                     </div>
                 </div>
-                <Rating rating={rating} setRating={setRating}/>
-                <Content content={content} setContent={setContent}/>
+                <Rating rating={rating} setRating={setRating} add={add}/>
+                <Content content={content} setContent={setContent} add={add}/>
             </div>
         </div>
     );

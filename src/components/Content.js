@@ -2,13 +2,17 @@ import React from 'react';
 
 function Content(props) {
 
-    function handlePress(e) {
-        props.setContent(e.key);
+    const {content, setContent, add} = props
+
+    function handlePress(event) {
+        setContent(event.target.value);
     }
 
     return(
-        <textarea className="ReviewContent" onKeyDown={(e)=>handlePress(e)} placeholder="Enter your Review">
-        </textarea>
+        <div>
+            {add ? <textarea className="ReviewContent" onChange={handlePress} placeholder="Enter your Review"></textarea>
+            : <div className="ReviewContent">{content}</div>}
+        </div>
     );
 }
 
