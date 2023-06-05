@@ -216,20 +216,28 @@
     justify-content: flex-end;
 }
 
-.AddPost {
-    width: 10vw;
+.AddText {
+    width: 12vw;
     height: 5vh;
+    background-color: #8DC9F8;
+    padding: 0 0.5rem;
+    margin: 1.5rem 0;
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #8DC9F8;
-    padding: 0 0.5rem;
-    margin: 0 2rem;
-    cursor: pointer;
+    outline: none;
+    border: none;
+    font-size: 1rem;;
 }
 
-.AddText {
+.PostText {
     margin-left: 7px;
+}
+
+.AddPost {
+    display: flex;
+    justify-content: center;
 }
 
 .OutsideBorder {

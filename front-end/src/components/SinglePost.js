@@ -5,14 +5,14 @@ import Content from './Content';
 
 function SinglePost(props) {
     const {content, setContent, rating, setRating, name, setName,
-        town, setTown, add} = props;
+        date, setDate, add} = props;
 
     function handleNameChange(event) {
         setName(event.target.value);
     }
 
-    function handleTownChange(event) {
-        setTown(event.target.value);
+    function handleDateChange(event) {
+        setDate(event.target.value);
     }
 
     return (
@@ -24,12 +24,12 @@ function SinglePost(props) {
                     </div>
                     <div className="NameLocationContainer">
                         <div className="UserName">
-                            {add ? <input className="NameContainer" placeholder='Name' onChange={handleNameChange}/>
+                            {add ? <input id="NameInput" className="NameContainer" placeholder='Name' onChange={handleNameChange} value={name}/>
                             : <div className="OutputName">{name}</div>}
                         </div>
-                        <div className="Location">
-                            {add && <input placeholder='Hometown' onChange={handleTownChange}/>}
-                            {!add && <div className="OutputTown">{town}</div>}
+                        <div className="Time">
+                            {add && <input id="DateInput" placeholder='Date (MM/DD/YYYY)' onChange={handleDateChange} value={date}/>}
+                            {!add && <div className="OutputDate">{date}</div>}
                         </div>
                     </div>
                 </div>

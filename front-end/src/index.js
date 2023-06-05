@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import About from './About';
 import Place from './components/Place';
-import Info from './Info';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -21,15 +20,9 @@ const router = createBrowserRouter([
     element: <About />
   },
   {
-    path: "/info",
-    element: <Info />,
-    errorElement: <div>Wrong Path</div>,
-    children: [
-      {
-        path: ":key",
-        element: <Place />
-      },
-    ],
+    path: "/:key",
+    element: <Place />,
+    errorElement: <div>Wrong Path</div>
   },
 ]);
 

@@ -10,7 +10,7 @@ function Content(props) {
 
     return(
         <div>
-            {add ? <textarea className="ReviewContent" onChange={handlePress} placeholder="Enter your Review"></textarea>
+            {add ? <textarea className="ReviewContent" onChange={handlePress} placeholder="Enter your Review" value={content}/>
             : <div className="ReviewContent">{content}</div>}
         </div>
     );

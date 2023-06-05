@@ -38,7 +38,7 @@ function SearchBar() {
             <div className="SearchBar">
                 <FaSearch className="SearchIcon"/>
                 <input className="SearchBox" placeholder='Enter a city' value={value} onChange={handleChange} onKeyDown={(e) => {handleEnter(e)}}/>
-                {entered && <Navigate to={"/info/"+selectedKey} />}
+                {entered && <Navigate to={"/"+selectedKey} />}
             </div>  
             <div className="Dropdown">
                 {cities.filter((item) => {
@@ -48,7 +48,7 @@ function SearchBar() {
                 }).map((item) => {
                     return (
                         <div key={item.name} className="Dropdown-option" onClick={() => handleClick(item.name)}>
-                            {entered && selectedKey === item.name && <Navigate to={"/info/"+item.name} />}
+                            {entered && selectedKey === item.name && <Navigate to={"/"+item.name} />}
                             {item.name}
                         </div>
                     );
