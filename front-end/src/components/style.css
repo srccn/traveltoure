@@ -308,6 +308,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.EditWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-left: auto;
 }
 
+.Edit {
+    font-size: 1.1rem;
+    margin: 3rem;
+    padding: 0.25rem 1rem;
+    cursor: pointer;
+    background: lightpink;
+    border: none;
+    border-radius: 0.5rem;
+}

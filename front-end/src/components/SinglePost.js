@@ -6,7 +6,8 @@ import { AiFillDelete } from 'react-icons/ai';
 
 function SinglePost(props) {
     const {content, setContent, rating, setRating, name, setName,
-        date, setDate, deletePost, add, index, place} = props;
+        date, setDate, add, deletePost, first, startEdit, handleEdit, index, place} = props;
+
 
     function handleNameChange(event) {
         setName(event.target.value);
@@ -32,6 +33,10 @@ function SinglePost(props) {
                             {add && <input id="DateInput" placeholder='Date (MM/DD/YYYY)' onChange={handleDateChange} value={date}/>}
                             {!add && <div className="OutputDate">{date}</div>}
                         </div>
+                    </div>
+                    <div className="EditWrapper">
+                        {!add && <button className="Edit" onClick={() => startEdit(place, index)}>Edit</button>}
+                        {add && !first && <button className="Edit" onClick={() => handleEdit(content, rating, name, date, place, index)}>Finished Edit</button>}
                     </div>
                     <div className="RemoveIconWrapper">
                         {!add && <AiFillDelete size={"1.5rem"} cursor={"pointer"} onClick={() => {deletePost(place, index)}}/>}

@@ -48,7 +48,17 @@ app.post("/delete", (req, res, next) => {
     console.log(req.body);
     const itemKey = req.body.key;
     const location = req.body.location;
-    postDataBase[location].pop(itemKey);
+    console.log(itemKey);
+    postDataBase[location].splice(itemKey, 1);
     console.log(postDataBase);
     res.send(postDataBase);
 })
+
+app.post("/edit", (req, res, next) => {
+    console.log("started edit");
+    const result = req.body;
+    const place = result.place;
+    const index = result.index;
+    postDataBase[place][index].editing = true;
+    res.send(postDataBase);
+});

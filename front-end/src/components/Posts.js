@@ -34,12 +34,13 @@ function Posts(props) {
             rating : rating,
             name : name,
             date : date,
+            delete: false,
+            editing: false,
         };
 
         var addPackage = {
             key : id,
             list: postReference,
-            delete: false,
         };
         try {
             const send = fetch("http://localhost:3001/", {
@@ -95,7 +96,33 @@ function Posts(props) {
         }
     }
 
-    var keyCounter = -1;
+    function startEdit(place, index) {
+        try {
+            const result = fetch("http://localhost:3001/edit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "Application/json",
+                },
+                body: JSON.stringify({place: place, index: index})
+            })
+    
+            result
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log(data);
+                })
+        }
+        catch(error) {
+            console.log(error.message);
+        }
+    }
+
+    function handleEdit(content, rating, name, date, place, index) {
+
+    }
+    var index = -1;
     return (
         <div>
             <div className="AddPost">
@@ -103,12 +130,14 @@ function Posts(props) {
             </div>
             <SinglePost content = {content} setContent={setContent} rating={rating}
             setRating={setRating} name={name} setName={setName} date={date} setDate={setDate}
-            add={true}/>
+            add={true} first={true}/>
             {localData.map((item) => {
+                index += 1;
                 return <SinglePost content = {item.content} setContent={setContent} rating={item.rating}
                 setRating={setRating} name={item.name !== "" ? item.name : "Anonymous User"} setName={setName} 
                 date={item.date !== "" ? item.date : "Unknown Date"} setDate={setDate}
-                deletePost={handleDelete} add={false} index={++keyCounter} place={id} key={++keyCounter}/>
+                add={false} deletePost={handleDelete} first={false} startEdit={startEdit} handleEdit={handleEdit}
+                index={index} place={id} key={index}/>
             })}
         </div>
     );
