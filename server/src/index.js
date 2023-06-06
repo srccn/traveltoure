@@ -48,7 +48,6 @@ app.post("/delete", (req, res, next) => {
     console.log(req.body);
     const itemKey = req.body.key;
     const location = req.body.location;
-    console.log(itemKey);
     postDataBase[location].splice(itemKey, 1);
     console.log(postDataBase);
     res.send(postDataBase);
@@ -60,5 +59,22 @@ app.post("/edit", (req, res, next) => {
     const place = result.place;
     const index = result.index;
     postDataBase[place][index].editing = true;
+    console.log(postDataBase[place]);
     res.send(postDataBase);
 });
+
+app.post("/finishEdit", (req, res, next) => {
+    console.log("finished edit");
+    const result = req.body;
+    const index = result.index;
+    const place = result.place;
+    console.log(postDataBase[place]);
+    const post = postDataBase[place][index];
+    post.content = result.content;
+    post.rating = result.rating;
+    post.name = result.name;
+    post.date = result.date;
+    post.editing = false;
+    res.send(postDataBase);
+});
+
