@@ -204,7 +204,6 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    position: sticky;
     top: 0rem;
 }
 
@@ -302,5 +301,13 @@
     font-weight: 600;
     font-size: 1rem;
     background-color: white;
+}
+
+
+.RemoveIconWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
 }
 

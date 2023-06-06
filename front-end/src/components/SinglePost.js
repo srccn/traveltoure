@@ -1,11 +1,12 @@
 import React from 'react';
 import Rating from './Rating';
 import Content from './Content';
+import { AiFillDelete } from 'react-icons/ai';
 
 
 function SinglePost(props) {
     const {content, setContent, rating, setRating, name, setName,
-        date, setDate, add} = props;
+        date, setDate, deletePost, add, index, place} = props;
 
     function handleNameChange(event) {
         setName(event.target.value);
@@ -31,6 +32,9 @@ function SinglePost(props) {
                             {add && <input id="DateInput" placeholder='Date (MM/DD/YYYY)' onChange={handleDateChange} value={date}/>}
                             {!add && <div className="OutputDate">{date}</div>}
                         </div>
+                    </div>
+                    <div className="RemoveIconWrapper">
+                        {!add && <AiFillDelete size={"1.5rem"} cursor={"pointer"} onClick={() => {deletePost(place, index)}}/>}
                     </div>
                 </div>
                 <Rating rating={rating} setRating={setRating} add={add}/>
