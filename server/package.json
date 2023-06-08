@@ -12,6 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
-    "nodemon": "^2.0.22"
+    "express-openid-connect": "^2.16.0",
+    "nodemon": "^2.0.22",
+    "passport-http-bearer": "^1.0.1"
   }
 }

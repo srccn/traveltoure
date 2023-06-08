@@ -12,7 +12,6 @@ function Header() {
                 <div className="Rest">
                     <HeaderItem value="Home" />
                     <HeaderItem value="About" />
-                    <HeaderItem value="View Map" />
                 </div>
             </div>
         </>

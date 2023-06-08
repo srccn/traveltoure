@@ -6,7 +6,9 @@ function About() {
     return (
         <div>
             <Header />
-            Hello there!
+            <div className="About">
+                Hello there!
+            </div>
         </div>
     );
 }

@@ -6,11 +6,16 @@ import { Navigate } from 'react-router-dom';
 function HeaderItem({ value }) {
     const [otherClicked, setOtherClicked] = useState(false);
     const [homeClick, setHomeClick] = useState(false);
+    // const [loginClick, setLoginClick] = useState(false);
 
     function handleClick() {
-        value === "Home" || value === "TravelTour" ? setHomeClick(true) : setOtherClicked(true);
+        if (value === "Home" || value === "TravelTour") {
+            setHomeClick(true)
+        }
+        else {
+            setOtherClicked(true);
+        }
     }
-
     return (
         <div className="HeaderItem" onClick={handleClick}>
             {homeClick && <Navigate to="/"/>}

@@ -7,7 +7,7 @@ import { AiFillDelete } from 'react-icons/ai';
 function SinglePost(props) {
     const {content, setContent, rating, setRating, name, setName,
         date, setDate, add, deletePost, first, editing,
-        startEdit, handleEdit, index, place} = props;
+        startEdit, handleEdit, index, place, nameChange} = props;
 
 
     function handleNameChange(event) {
@@ -25,9 +25,11 @@ function SinglePost(props) {
                     <div className="ProfileIcon">
                         <img className="ProfileImage" src="https://cdn.pixabay.com/photo/2012/08/27/14/19/mountains-55067_640.png" alt="profile-icon"></img>
                     </div>
+                    <div className="FirstUserPostLocation">
+                    </div>
                     <div className="NameLocationContainer">
                         <div className="UserName">
-                            {add ? <input id="NameInput" className="NameContainer" placeholder='Name' onChange={handleNameChange} value={name}/>
+                            {nameChange && add ? <input id="NameInput" className="NameContainer" placeholder='Name' onChange={handleNameChange} value={name}/>
                             : <div className="OutputName">{name}</div>}
                         </div>
                         <div className="Time">

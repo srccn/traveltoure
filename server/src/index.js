@@ -1,13 +1,17 @@
 const express = require('express');
+const path = require("path");
 
 const app = express();
 const PORT = 3001;
+  
+
+app.use(express.static(path.join(__dirname, "..", "..", "front-end", "build")));
 
 app.use(express.json());
 app.use((req, res, next) => {
     res.set("Access-Control-Allow-Origin", "*");
     res.set("Access-Control-Allow-Headers", "*")
-    res.set("Access-Control-Allow-Methods", 'POST,GET');
+    res.set("Access-Control-Allow-Methods", 'POST, GET, PUT, DELETE');
     next();
 })
 
@@ -15,19 +19,13 @@ app.listen(PORT, () => {console.log("Listening on port " + PORT)});
 
 postDataBase = {};
 
-app.get("/home", (req, res, next) => {
-console.log("perfomed get");
-    res.sendFile("../../front-end/public/index.html");
-});
-
-app.get("/", (req, res, next) => {
+app.get("/api/getList", (req, res, next) => {
     console.log("perfomed get");
     res.send(postDataBase);
 });
-    
 
 
-app.post("/", (req, res, next) => {
+app.post("/api/add", (req, res, next) => {
     console.log("performed post");
     const newItem = req.body;
     console.log(newItem);
@@ -43,7 +41,7 @@ app.post("/", (req, res, next) => {
     res.send(postDataBase);
 });
 
-app.post("/delete", (req, res, next) => {
+app.delete("/api/delete", (req, res, next) => {
     console.log("performed delete");
     console.log(req.body);
     const itemKey = req.body.key;
@@ -53,7 +51,7 @@ app.post("/delete", (req, res, next) => {
     res.send(postDataBase);
 })
 
-app.post("/edit", (req, res, next) => {
+app.put("/api/edit", (req, res, next) => {
     console.log("started edit");
     const result = req.body;
     const place = result.place;
@@ -63,7 +61,7 @@ app.post("/edit", (req, res, next) => {
     res.send(postDataBase);
 });
 
-app.post("/finishEdit", (req, res, next) => {
+app.post("/api/finishEdit", (req, res, next) => {
     console.log("finished edit");
     const result = req.body;
     const index = result.index;
@@ -77,4 +75,6 @@ app.post("/finishEdit", (req, res, next) => {
     post.editing = false;
     res.send(postDataBase);
 });
+
+module.exports = app;
 

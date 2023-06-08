@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import About from './About';
 import Place from './components/Place';
+import Person from './components/Person';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -20,10 +21,15 @@ const router = createBrowserRouter([
     element: <About />
   },
   {
-    path: "/:key",
+    path: "/place/:key",
     element: <Place />,
     errorElement: <div>Wrong Path</div>
   },
+  {
+    path: "/person/:key",
+    element: <Person />,
+    errorElement: <div>Wrong Path</div>
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

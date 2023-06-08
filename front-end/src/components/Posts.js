@@ -3,9 +3,10 @@ import SinglePost from './SinglePost';
 import { useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
 
+
 function Posts(props) {
     const [localData, setLocalData] = useState([]);
-    const {id} = props;    
+    const {id} = props;
 
     //make post states
     const [content, setContent] = useState("");
@@ -19,12 +20,10 @@ function Posts(props) {
     const [editName, setEditName] = useState("");
     const [editDate, setEditDate] = useState("");
 
-    const [editing, setEditing] = useState(false);
-
-
+    const [editing, setEditing] = useState(false);  
 
     useEffect(() => {
-        const result = fetch("http://localhost:3001/",{
+        const result = fetch("http://localhost:3001/api/getList",{
             method: "GET"
         });
 
@@ -38,8 +37,8 @@ function Posts(props) {
             })
     }, [id]);
 
-
-    function handleSubmit() {
+    //adds post to postlist
+    function handleSubmit(place) {
         var postReference = {
             content : content,
             rating : rating,
@@ -50,11 +49,11 @@ function Posts(props) {
         };
 
         var addPackage = {
-            key : id,
+            key : place,
             list: postReference,
         };
         try {
-            const send = fetch("http://localhost:3001/", {
+            const send = fetch("http://localhost:3001/api/add", {
                 method: "POST",
                 headers: {
                     'Content-Type':'application/json',
@@ -69,7 +68,7 @@ function Posts(props) {
                 return response.json();
             })
             .then((data) => {
-                setLocalData(data[id] !== undefined ? data[id] : []);
+                setLocalData(data[place] !== undefined ? data[place] : []);
                 console.log(localData);
                 console.log(data);
             })
@@ -84,10 +83,11 @@ function Posts(props) {
         setDate("");
     }
 
+    //deletes post
     function handleDelete(place, index) {
         try {
-            const result = fetch("http://localhost:3001/delete", {
-                method: "POST",
+            const result = fetch("http://localhost:3001/api/delete", {
+                method: "DELETE",
                 headers: {
                     'Content-Type':'application/json',
                 },
@@ -99,7 +99,7 @@ function Posts(props) {
                     return response.json();
                 })
                 .then((data) => {
-                    setLocalData(data[id]);
+                    setLocalData(data[place]);
                 })
         }
         catch(error) {
@@ -107,11 +107,12 @@ function Posts(props) {
         }
     }
 
+    //modifies editing to true for edited post
     //retrieves post that is being edited and sets relevant post data
     function startEdit(place, index) {
         try {
-            const result = fetch("http://localhost:3001/edit", {
-                method: "POST",
+            const result = fetch("http://localhost:3001/api/edit", {
+                method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -123,13 +124,13 @@ function Posts(props) {
                     return response.json();
                 })
                 .then((data) => {
-                    const item = data[id][index];
+                    const item = data[place][index];
                     console.log(item);
                     setEditContent(item.content);
                     setEditDate(item.date);
                     setEditRating(item.rating);
                     setEditName(item.name);
-                    setLocalData(data[id]);
+                    setLocalData(data[place]);
                 })
         }
         catch(error) {
@@ -138,9 +139,9 @@ function Posts(props) {
         setEditing(true);
     }
 
-    //puts edited data into database
+    //puts edited data into database and changes existing values
     function handleEdit(content, rating, name, date, place, index) {
-        const result = fetch("http://localhost:3001/finishEdit", {
+        const result = fetch("http://localhost:3001/api/finishEdit", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -163,8 +164,6 @@ function Posts(props) {
                 console.log(data);
                 setLocalData(data[id]);
             })
-
-
         setEditing(false);
     }
 
@@ -173,28 +172,31 @@ function Posts(props) {
     return (
         <div>
             <div className="AddPost">
-                <button className="AddText" onClick={() => handleSubmit()}><FaPlus /> <div className="PostText">Add Post</div></button>
+                <button className="AddText" onClick={() => handleSubmit(id)}><FaPlus /> <div className="PostText">Add Post</div></button>
             </div>
             <SinglePost content = {content} setContent={setContent} rating={rating}
             setRating={setRating} name={name} setName={setName} date={date} setDate={setDate}
-            add={true} first={true}/>
+            add={true} first={true} nameChange={true}/>
             {localData.map((item) => {
                 index += 1;
+                //currently editing post
                 if (item.editing) {
                     return <SinglePost content = {editContent} setContent={setEditContent} rating={editRating}
-                    setRating={setEditRating} name={editName !== "" ? editName : "Anonymous User"} setName={setEditName} 
-                    date={editDate !== "" ? editDate : "Unknown Date"} setDate={setEditDate}
+                    setRating={setEditRating} name={editName} setName={setEditName} 
+                    date={editDate} setDate={setEditDate}
                     add={true} deletePost={handleDelete} first={false} editing={editing} startEdit={startEdit} 
-                    handleEdit={handleEdit} index={index} place={id} key={index} />
+                    handleEdit={handleEdit} index={index} place={id} nameChange={true} key={index} />
                 }
+                //non edit posts
                 return <SinglePost content = {item.content} setContent={setContent} rating={item.rating}
                     setRating={setRating} name={item.name !== "" ? item.name : "Anonymous User"} setName={setName} 
                     date={item.date !== "" ? item.date : "Unknown Date"} setDate={setDate}
                     add={false} deletePost={handleDelete} first={false} editing={editing} startEdit={startEdit}
-                    handleEdit={handleEdit} index={index} place={id} key={index} />
+                    handleEdit={handleEdit} index={index} place={id} nameChange={false} key={index} />
             })}
         </div>
     );
 }
+
 
 export default Posts;
