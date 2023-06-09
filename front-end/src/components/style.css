@@ -8,13 +8,11 @@
     color: #EAE6E5;
 }
 
-.HeaderItem {
+.First {
     padding: 2em 4em;
     cursor: pointer;
-}
-
-.First {
-    padding: 0em 4em;
+    color: white;
+    text-decoration: none;
     align-self: flex-start;
 }
 
@@ -201,10 +199,6 @@
 
 .FirstLine {
     padding: 1rem 2rem 0.5rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    top: 0rem;
 }
 
 .ContentFirstLine {
@@ -263,7 +257,6 @@
     height: 10vh;
     width: 10vh;
     border-radius: 50%;
-    margin: rem;
 }
 
 body {
@@ -334,19 +327,17 @@ body {
 }
 
 .About {
+    margin: 2rem;
     display: flex;
     justify-content: center;
-    font-size: 1.25rem;
+    font-size: 2rem;
+    font-weight: 700;
 }
 
 .Time {
     word-wrap: break-word;
 }
 
-.PersonSearch {
-    margin: 2vh 0 0vh 8vw;
-    width: 120%;
-}
 
 .NameKey {
     display: flex;
@@ -356,11 +347,76 @@ body {
     margin: 4rem;
 }
 
-.UserSearch {
-    width: 30%;
+
+.PlaceName {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem;
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
-.UserSearchContainer {
+.RegisterLoginWrapper {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem;
+}
+
+.Summary {
+    display: flex;
+    justify-content: center;
+    padding: 0 5rem;
+}
+
+.SummaryText {
+    width: 70%;
+    font-size: 1.5rem;
+}
+
+.LoginRegisterTitle {
+    padding: 2rem;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.UserNameWrapper {
+    padding: 1rem;
+}
+
+.RegisterInput {
+    font-size: 1.25rem;
+}
+
+.SubmitLoginRegister {
+    font-size: 1.5rem;
+    margin: 2rem;
+}
+
+.LoginRegisterButton {
+    font-size: 1.25rem;
+}
+
+.ExampleLogin {
+    display: flex;
+    flex-direction: row;
+}
+
+.ExampleUserPass {
+    margin: 0 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.HeaderItem {
+    padding: 2em 4em;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+
+.ReminderRegister {
+    margin: 2rem;
 }

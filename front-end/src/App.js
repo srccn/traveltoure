@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './components/Header';
 import Top from './components/Top';
 
-function App() {  
+function App() {
   return (
     <div>
       <div className="landing">

@@ -2,9 +2,14 @@ import React, { useEffect } from 'react';
 import SinglePost from './SinglePost';
 import { useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
+import Cookies from 'js-cookie';
 
 
 function Posts(props) {
+
+    const nameCookie = Cookies.get("name");
+    console.log(nameCookie);
+
     const [localData, setLocalData] = useState([]);
     const {id} = props;
 
@@ -39,6 +44,7 @@ function Posts(props) {
 
     //adds post to postlist
     function handleSubmit(place) {
+
         var postReference = {
             content : content,
             rating : rating,
@@ -46,6 +52,7 @@ function Posts(props) {
             date : date,
             delete: false,
             editing: false,
+            username: nameCookie,
         };
 
         var addPackage = {
@@ -176,7 +183,7 @@ function Posts(props) {
             </div>
             <SinglePost content = {content} setContent={setContent} rating={rating}
             setRating={setRating} name={name} setName={setName} date={date} setDate={setDate}
-            add={true} first={true} nameChange={true}/>
+            add={true} first={true} firstUserPost={false}/>
             {localData.map((item) => {
                 index += 1;
                 //currently editing post
@@ -185,14 +192,16 @@ function Posts(props) {
                     setRating={setEditRating} name={editName} setName={setEditName} 
                     date={editDate} setDate={setEditDate}
                     add={true} deletePost={handleDelete} first={false} editing={editing} startEdit={startEdit} 
-                    handleEdit={handleEdit} index={index} place={id} nameChange={true} key={index} />
+                    handleEdit={handleEdit} index={index} place={id} firstUserPost={false}
+                    userName={item.username} key={index} />
                 }
                 //non edit posts
                 return <SinglePost content = {item.content} setContent={setContent} rating={item.rating}
                     setRating={setRating} name={item.name !== "" ? item.name : "Anonymous User"} setName={setName} 
                     date={item.date !== "" ? item.date : "Unknown Date"} setDate={setDate}
                     add={false} deletePost={handleDelete} first={false} editing={editing} startEdit={startEdit}
-                    handleEdit={handleEdit} index={index} place={id} nameChange={false} key={index} />
+                    handleEdit={handleEdit} index={index} place={id} firstUserPost={false} 
+                    userName={item.username} key={index} />
             })}
         </div>
     );

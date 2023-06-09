@@ -1,13 +1,15 @@
 import React from 'react';
 import Header from './Header';
-import PersonSearch from './PersonSearch';
-import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import SinglePost from './SinglePost';
 import SearchBar from './SearchBar';
+import Cookies from 'js-cookie';
+import { Navigate } from 'react-router-dom';
 
-function Person() {
-    const { key } = useParams();
+function MyPosts() {
+
+    const username = Cookies.get("name");
+    
     const [localData, setLocalData] = useState([]);
     const [editing, setEditing] = useState(false);
    
@@ -28,11 +30,10 @@ function Person() {
                 return response.json();
             })
             .then((data) => {
-                console.log(data);
                 setLocalData(Object.entries(data));
             })
 
-    }, [key]);
+    }, []);
 
     //modifies editing to true for edited post
     //retrieves post that is being edited and sets relevant post data
@@ -52,7 +53,6 @@ function Person() {
                 })
                 .then((data) => {
                     const item = data[place][index];
-                    console.log(item);
                     setEditContent(item.content);
                     setEditDate(item.date);
                     setEditRating(item.rating);
@@ -63,6 +63,7 @@ function Person() {
         catch(error) {
             console.log(error.message);
         }
+        console.log("started editing");
         setEditing(true);
     }
 
@@ -96,6 +97,7 @@ function Person() {
 
      //deletes post
      function handleDelete(place, index) {
+        console.log(index);
         try {
             const result = fetch("http://localhost:3001/api/delete", {
                 method: "DELETE",
@@ -116,43 +118,50 @@ function Person() {
         catch(error) {
             console.log(error.message);
         }
-    }
+     }
 
-    console.log(localData);
     return (
         <div>
             <Header />
-            <div className="UserSearchContainer">
-                <SearchBar/>
-                <PersonSearch className="UserSearch"/>
+            <div className="FirstLine">
+                <div className="SearchInfo">
+                    <SearchBar/>
+                </div>
             </div>
+            {username === undefined && <Navigate to="/login"/>}
             <div className="NameKey">
-                Posts with name "{key}":
+                Your Posts:
             </div>
             <div className="PostsContainer">
                 {
                     localData.map((placeAndPosts) => {
-                        let index = -1;
+                        let index = -1; 
                         const place = placeAndPosts[0];
                         const posts = placeAndPosts[1].filter((post) => {
-                            return post.name === key
-                        })
-                        return posts.map((post) => {
                             index += 1;
                             post.index = index;
-                            console.log(post);
+                            //temporarily and then set first post to true right after
+                            post.firstPost = false;
+                            return post.username === username;
+                        });
+
+                        if (posts.length > 0) {
+                            posts[0].firstPost = true;
+                        }
+
+                        return posts.map((post) => {
                             //currently editing post
                             if (post.editing) {
                                 return <SinglePost content = {editContent} setContent={setEditContent} rating={editRating}
                                 setRating={setEditRating} name={editName} setName={setEditName} 
                                 date={editDate} setDate={setEditDate} add={true} deletePost={handleDelete} first={false} 
                                 editing={editing} startEdit={startEdit} handleEdit={handleEdit} index={post.index} place={place} 
-                                nameChange={false} key={post.index}/>
+                                key={post.index} firstUserPost={post.firstPost} userName={post.username} />
                             }
                             return <SinglePost content={post.content} setContent={setEditContent} rating={post.rating}
                             setRating={setEditRating} name={post.name} setName={setEditName}  date={post.date} setDate={setEditDate}
                             add={false} deletePost={handleDelete} first={false} editing={editing} startEdit={startEdit} handleEdit={handleEdit}
-                            index = {post.index} place={place} nameChange={false} key={post.index}/>
+                            index = {post.index} place={place} key={post.index} firstUserPost={post.firstPost} userName={post.username}/>
                         })
                     })
                 }
@@ -162,4 +171,4 @@ function Person() {
 }
 
 
-export default Person;
+export default MyPosts;

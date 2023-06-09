@@ -1,23 +1,42 @@
 const express = require('express');
 const path = require("path");
+const session = require("express-session");
+const store = new session.MemoryStore();
 
 const app = express();
 const PORT = 3001;
-  
 
-app.use(express.static(path.join(__dirname, "..", "..", "front-end", "build")));
+app.use(session({
+    name: "cookieMonster",
+    secret: "my secret",
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+        httpOnly: false,
+        maxAge: 3600000,
+        secure: false,               //for development use, for production, set to true
+    },
+    store: store,
+}))
 
 app.use(express.json());
 app.use((req, res, next) => {
-    res.set("Access-Control-Allow-Origin", "*");
-    res.set("Access-Control-Allow-Headers", "*")
+    res.set("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.set("Access-Control-Allow-Headers", "*");
+    res.header('Access-Control-Allow-Credentials', true);
     res.set("Access-Control-Allow-Methods", 'POST, GET, PUT, DELETE');
+    res.header("Access-Control-Allow-Headers", "Content-Type");
     next();
 })
+
+app.use(express.static(path.join(__dirname, "..", "..", "front-end", "build")));
 
 app.listen(PORT, () => {console.log("Listening on port " + PORT)});
 
 postDataBase = {};
+users = {
+    "user": "123",
+};
 
 app.get("/api/getList", (req, res, next) => {
     console.log("perfomed get");
@@ -53,6 +72,7 @@ app.delete("/api/delete", (req, res, next) => {
 
 app.put("/api/edit", (req, res, next) => {
     console.log("started edit");
+    console.log(req.body);
     const result = req.body;
     const place = result.place;
     const index = result.index;
@@ -75,6 +95,60 @@ app.post("/api/finishEdit", (req, res, next) => {
     post.editing = false;
     res.send(postDataBase);
 });
+
+app.post("/api/register", (req, res, next) => {
+    console.log(req.body);
+    const user = req.body.value;
+    const pass = req.body.pass;
+    if (!(user in users)) {
+        users[user] = pass;
+        res.send({status: "success"});
+    }
+    else {
+        res.send({status: "failed"});
+    }
+});
+
+app.post("/api/login", (req, res, next) => {
+    console.log(users);
+    const username = req.body.value;
+    const password = req.body.pass;
+    if (req.session.authenticated) {
+        req.session.user = username;
+        console.log("this is username", username);
+        res.send({status: "logged in", data: req.sessionID});
+        console.log("not first");
+    }
+    else {
+        //use some sort of hashing
+        console.log(users[username]);
+        console.log(users);
+        if (users[username] === password) {
+            req.session.authenticated = true;
+            req.session.user = username;
+            res.cookie("name", username, {
+                maxAge: 3600000,
+                httpOnly: false,
+            });
+            console.log(req.sessionID);
+            console.log("this is username", username);
+            res.send({status: "logged in", data: req.sessionID});
+        }
+        else {
+            res.send({status: "authentication error"});
+        }
+    }
+});
+
+app.get("/api/isloggedIn", (req, res, next) => {
+    console.log("after login: ", req.sessionID);
+    if (req.session.authenticated) {
+        res.send({user: req.session.user, status: "authenticated", store: store});
+    }
+    else {
+        res.send({status: "not authenticated"});
+    }
+})
 
 module.exports = app;
 

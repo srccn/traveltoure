@@ -4,7 +4,9 @@ import './index.css';
 import App from './App';
 import About from './About';
 import Place from './components/Place';
-import Person from './components/Person';
+import MyPosts from './components/MyPosts';
+import Login from './components/Login';
+import Register from './components/Register';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -26,8 +28,18 @@ const router = createBrowserRouter([
     errorElement: <div>Wrong Path</div>
   },
   {
-    path: "/person/:key",
-    element: <Person />,
+    path: "/myPosts",
+    element: <MyPosts />,
+    errorElement: <div>Wrong Path</div>
+  },
+  {
+    path: "/login",
+    element: <Login />,
+    errorElement: <div>Wrong Path</div>
+  },
+  {
+    path: "/register",
+    element: <Register />,
     errorElement: <div>Wrong Path</div>
   }
 ]);
