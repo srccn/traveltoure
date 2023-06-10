@@ -2,7 +2,7 @@
 
 
 ## Overview
-A web application where users can find their next travel destination from other user reviews and general destination characteristics. Users can also post their own reviews of traveling locations and login to view their past posts.
+A web application where users can find their next travel destination from other user reviews and general destination characteristics. Users can also post their own reviews of traveling locations and login to view their past posts and make edits.
 
 ## Features
   * Create user reviews on various travel destinations
