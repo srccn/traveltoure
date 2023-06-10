@@ -12,7 +12,7 @@ A web application where users can find their next travel destination from other 
 
 ## Development
 1. Clone repository
-2. Run ```npm install ``` in command line
+2. Run ```npm install``` in command line
 3. ```cd``` into "server" folder
 4. Run ```npm run start:dev```
-5. open browser to ```http://localhost:3001```
+5. Open browser to http://localhost:3001/
