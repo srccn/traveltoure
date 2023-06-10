@@ -115,14 +115,10 @@ app.post("/api/login", (req, res, next) => {
     const password = req.body.pass;
     if (req.session.authenticated) {
         req.session.user = username;
-        console.log("this is username", username);
         res.send({status: "logged in", data: req.sessionID});
-        console.log("not first");
     }
     else {
-        //use some sort of hashing
-        console.log(users[username]);
-        console.log(users);
+        //use some sort of hashing tool for production
         if (users[username] === password) {
             req.session.authenticated = true;
             req.session.user = username;
@@ -130,8 +126,6 @@ app.post("/api/login", (req, res, next) => {
                 maxAge: 3600000,
                 httpOnly: false,
             });
-            console.log(req.sessionID);
-            console.log("this is username", username);
             res.send({status: "logged in", data: req.sessionID});
         }
         else {
@@ -141,7 +135,6 @@ app.post("/api/login", (req, res, next) => {
 });
 
 app.get("/api/isloggedIn", (req, res, next) => {
-    console.log("after login: ", req.sessionID);
     if (req.session.authenticated) {
         res.send({user: req.session.user, status: "authenticated", store: store});
     }

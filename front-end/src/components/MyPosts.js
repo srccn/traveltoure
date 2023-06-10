@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react';
 import SinglePost from './SinglePost';
 import SearchBar from './SearchBar';
 import Cookies from 'js-cookie';
-import { Navigate } from 'react-router-dom';
 
 function MyPosts() {
 
     const username = Cookies.get("name");
+    console.log(username);
     
     const [localData, setLocalData] = useState([]);
     const [editing, setEditing] = useState(false);
@@ -128,7 +128,6 @@ function MyPosts() {
                     <SearchBar/>
                 </div>
             </div>
-            {username === undefined && <Navigate to="/login"/>}
             <div className="NameKey">
                 Your Posts:
             </div>

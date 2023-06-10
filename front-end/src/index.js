@@ -7,6 +7,7 @@ import Place from './components/Place';
 import MyPosts from './components/MyPosts';
 import Login from './components/Login';
 import Register from './components/Register';
+import Authenticate from './components/Authenticate';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/myPosts",
-    element: <MyPosts />,
+    element: <Authenticate><MyPosts /></Authenticate>,
     errorElement: <div>Wrong Path</div>
   },
   {
