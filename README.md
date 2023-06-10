@@ -2,7 +2,7 @@
 
 
 ## Overview
-A web application where users can find their next travel destination from other user reviews and general destination characteristics. Users can also post their own reviews of traveling locations and login to view their past posts.
+A web application where users can find their next travel destination from other user reviews and general destination characteristics. Users can also post their own reviews of traveling locations and login to view their past posts and make edits.
 
 ## Features
   * Create user reviews on various travel destinations
@@ -12,9 +12,13 @@ A web application where users can find their next travel destination from other 
 
 ## Development
 1. Clone repository
-2. Run ```npm install```
 4. ```cd``` into "server" folder
     1. ```cd TravelTour/server```
-5. Run ```npm install express```
+5. Run ```npm install```
 6. Run ```npm run start:dev```
 7. Open browser to http://localhost:3001/
+
+
+## Demo
+
+For a **non-responsive** version of the website, visit https://traveltour.vercel.app/
