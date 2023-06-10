@@ -17,3 +17,8 @@ A web application where users can find their next travel destination from other 
 5. Run ```npm install```
 6. Run ```npm run start:dev```
 7. Open browser to http://localhost:3001/
+
+
+## Demo
+
+For a **non-responsive** version of the website, visit https://traveltour.vercel.app/
