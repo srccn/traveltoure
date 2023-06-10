@@ -12,7 +12,9 @@ A web application where users can find their next travel destination from other 
 
 ## Development
 1. Clone repository
-2. Run ```npm install``` in command line
-3. ```cd``` into "server" folder
-4. Run ```npm run start:dev```
-5. Open browser to http://localhost:3001/
+2. Run ```npm install```
+4. ```cd``` into "server" folder
+    1. ```cd TravelTour/server```
+5. Run ```npm install express```
+6. Run ```npm run start:dev```
+7. Open browser to http://localhost:3001/
