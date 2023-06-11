@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 function Login() {
     const dev = process.env.NODE_ENV === "development";
-    console.log(dev);
     //for username
     const [user, setUser] = useState("");
 

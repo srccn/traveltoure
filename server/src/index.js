@@ -21,8 +21,7 @@ app.use(session({
 
 app.use(express.json());
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3001/");
-    res.header("Access-Control-Allow-Origin", "https://traveltour.vercel.app/");
+    res.header("Access-Control-Allow-Origin", PORT === 3001 ? "http://localhost:3001" : "https://traveltour.vercel.app");
     res.header("Access-Control-Allow-Headers", "*");
     res.header('Access-Control-Allow-Credentials', true);
     res.header("Access-Control-Allow-Methods", 'POST, GET, PUT, DELETE');
