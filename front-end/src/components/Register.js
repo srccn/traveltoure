@@ -29,7 +29,9 @@ function Register() {
     }
 
     function handleRegister() {
-        const result = fetch(dev ? "http://localhost:3001/api/register" : "https://travel-tour.onrender.com/api/register",{
+        let server_url = window.location.protocol+"//"+window.location.host+"/api"
+        const result = fetch(server_url +"/register", {
+        //const result = fetch(dev ? "http://localhost:3001/api/register" : "https://travel-tour.onrender.com/api/register",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

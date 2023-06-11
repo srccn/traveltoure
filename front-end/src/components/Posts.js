@@ -28,7 +28,11 @@ function Posts(props) {
     const [editing, setEditing] = useState(false);  
 
     useEffect(() => {
-        const result = fetch(dev ? "http://localhost:3001/api/getList" : "https://travel-tour.onrender.com/api/getList",{
+
+        let server_url = window.location.protocol+"//"+window.location.host+"/api"
+        const result = fetch(server_url +"/getList", {        
+
+//        const result = fetch(dev ? "http://localhost:3001/api/getList" : "https://travel-tour.onrender.com/api/getList",{
             method: "GET"
         });
 
@@ -59,7 +63,9 @@ function Posts(props) {
             list: postReference,
         };
         try {
-            const send = fetch(dev ? "http://localhost:3001/api/add" : "https://travel-tour.onrender.com/api/add", {
+            let server_url = window.location.protocol+"//"+window.location.host+"/api"
+            const result = fetch(server_url +"/add", {
+            //const send = fetch(dev ? "http://localhost:3001/api/add" : "https://travel-tour.onrender.com/api/add", {
                 method: "POST",
                 headers: {
                     'Content-Type':'application/json',
@@ -67,7 +73,7 @@ function Posts(props) {
                 body: JSON.stringify(addPackage),
             })
 
-            send
+            result
             .then((response) => {
                 return response.json();
             })
@@ -88,7 +94,9 @@ function Posts(props) {
     //deletes post
     function handleDelete(place, index) {
         try {
-            const result = fetch(dev ? "http://localhost:3001/api/delete" : "https://travel-tour.onrender.com/api/delete", {
+            let server_url = window.location.protocol+"//"+window.location.host+"/api"
+            const result = fetch(server_url +"/delete", {
+            //const result = fetch(dev ? "http://localhost:3001/api/delete" : "https://travel-tour.onrender.com/api/delete", {
                 method: "DELETE",
                 headers: {
                     'Content-Type':'application/json',
@@ -113,7 +121,9 @@ function Posts(props) {
     //retrieves post that is being edited and sets relevant post data
     function startEdit(place, index) {
         try {
-            const result = fetch(dev ? "http://localhost:3001/api/edit" : "https://travel-tour.onrender.com/api/edit", {
+            let server_url = window.location.protocol+"//"+window.location.host+"/api"
+            const result = fetch(server_url +"/edit", {
+            //const result = fetch(dev ? "http://localhost:3001/api/edit" : "https://travel-tour.onrender.com/api/edit", {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -142,7 +152,9 @@ function Posts(props) {
 
     //puts edited data into database and changes existing values
     function handleEdit(content, rating, name, date, place, index) {
-        const result = fetch(dev ? "http://localhost:3001/api/finishEdit" : "https://travel-tour.onrender.com/api/finishEdit", {
+        let server_url = window.location.protocol+"//"+window.location.host+"/api"
+        const result = fetch(server_url +"/finishEdit", {
+        //const result = fetch(dev ? "http://localhost:3001/api/finishEdit" : "https://travel-tour.onrender.com/api/finishEdit", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
