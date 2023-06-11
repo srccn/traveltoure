@@ -6,9 +6,8 @@ import SearchBar from './SearchBar';
 import Cookies from 'js-cookie';
 
 function MyPosts() {
-
+    const dev = process.env.NODE_ENV === "development";
     const username = Cookies.get("name");
-    console.log(username);
     
     const [localData, setLocalData] = useState([]);
     const [editing, setEditing] = useState(false);
@@ -21,7 +20,7 @@ function MyPosts() {
 
     //gets all the posts with given name
     useEffect(() => {
-        const result = fetch("http://localhost:3001/api/getList", {
+        const result = fetch(dev ? "http://localhost:3001/api/getList" : "https://travel-tour.onrender.com/api/getList", {
             method: "GET",
         });
 
@@ -33,13 +32,13 @@ function MyPosts() {
                 setLocalData(Object.entries(data));
             })
 
-    }, []);
+    }, [dev]);
 
     //modifies editing to true for edited post
     //retrieves post that is being edited and sets relevant post data
     function startEdit(place, index) {
         try {
-            const result = fetch("http://localhost:3001/api/edit", {
+            const result = fetch(dev ? "http://localhost:3001/api/edit" : "https://travel-tour.onrender.com/api/edit", {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -63,13 +62,12 @@ function MyPosts() {
         catch(error) {
             console.log(error.message);
         }
-        console.log("started editing");
         setEditing(true);
     }
 
     //puts edited data into database and changes existing values
     function handleEdit(content, rating, name, date, place, index) {
-        const result = fetch("http://localhost:3001/api/finishEdit", {
+        const result = fetch(dev ? "http://localhost:3001/api/finishEdit" : "https://travel-tour.onrender.com/api/finishEdit", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -89,7 +87,6 @@ function MyPosts() {
                 return response.json();
             })
             .then((data) => {
-                console.log(data);
                 setLocalData(Object.entries(data));
             })
         setEditing(false);
@@ -97,9 +94,8 @@ function MyPosts() {
 
      //deletes post
      function handleDelete(place, index) {
-        console.log(index);
         try {
-            const result = fetch("http://localhost:3001/api/delete", {
+            const result = fetch(dev ? "http://localhost:3001/api/delete" : "https://travel-tour.onrender.com/api/delete", {
                 method: "DELETE",
                 headers: {
                     'Content-Type':'application/json',

@@ -15,7 +15,6 @@ function SinglePost(props) {
 
     
     const matches = cookieName === userName && userName !== undefined;
-    console.log(matches, add);
 
     function handleNameChange(event) {
         setName(event.target.value);

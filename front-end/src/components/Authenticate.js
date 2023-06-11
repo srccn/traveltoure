@@ -6,7 +6,6 @@ import Header from './Header';
 
 function Authenticate(props) {
     const name = Cookies.get("name");
-    console.log(name);
     if (name !== undefined) {
         return(
             <div>
