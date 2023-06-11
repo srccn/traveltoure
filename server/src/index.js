@@ -6,6 +6,7 @@ const store = new session.MemoryStore();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+app.use(express.static(path.join(__dirname, "..", "..", "front-end", "build")));
 app.use(session({
     name: "cookieMonster",
     secret: "my secret",
@@ -123,7 +124,7 @@ app.post("/api/login", (req, res, next) => {
             res.cookie("name", username, {
                 maxAge: 3600000,
                 httpOnly: false,
-                domain: ".onrender.com"
+                domain: process.env.domain,
             });
             res.send({status: "logged in", data: req.sessionID});
         }
